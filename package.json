@@ -1,0 +1,31 @@
+{
+  "name": "mini-evite",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Marcus Weiner <marcus.weiner@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "eslint": "^4.10.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "polymer-cli": "^1.5.7"
+  },
+  "dependencies": {
+    "@polymer/app-layout": "^3.0.0-pre.1",
+    "@polymer/iron-icon": "^3.0.0-pre.1",
+    "@polymer/iron-icons": "^3.0.0-pre.1",
+    "@polymer/iron-pages": "^3.0.0-pre.1",
+    "@polymer/paper-button": "^3.0.0-pre.1",
+    "@polymer/paper-card": "^3.0.0-pre.1",
+    "@polymer/paper-item": "^3.0.0-pre.1",
+    "@polymer/paper-styles": "^3.0.0-pre.1",
+    "@polymer/polymer": "^3.0.0-pre.1",
+    "firebase": "^4.6.0",
+    "navigo": "^5.3.3",
+    "normalize.css": "^7.0.0"
+  },
+  "scripts": {
+    "start": "polymer serve"
+  }
+}
