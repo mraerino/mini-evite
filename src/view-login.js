@@ -2,7 +2,7 @@ import {Element as PolymerElement} from "../node_modules/@polymer/polymer/polyme
 import { GestureEventListeners } from "../node_modules/@polymer/polymer/lib/mixins/gesture-event-listeners.js"
 import "../node_modules/@polymer/paper-button/paper-button.js";
 
-export class EviLogin extends GestureEventListeners(PolymerElement) {
+export class ViewLogin extends GestureEventListeners(PolymerElement) {
   constructor() {
     super();
   }
@@ -28,4 +28,4 @@ export class EviLogin extends GestureEventListeners(PolymerElement) {
   }
 }
 
-customElements.define('evi-login', EviLogin);
+customElements.define('view-login', ViewLogin);

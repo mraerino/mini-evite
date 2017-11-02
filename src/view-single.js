@@ -7,7 +7,7 @@ import "../node_modules/@polymer/iron-icons/social-icons.js";
 import "../node_modules/@polymer/paper-card/paper-card.js";
 import "../node_modules/@polymer/paper-button/paper-button.js";
 
-export class EviSingle extends PolymerElement {
+export class ViewSingle extends PolymerElement {
   constructor() {
     super();
 
@@ -140,4 +140,4 @@ export class EviSingle extends PolymerElement {
   }
 }
 
-customElements.define("evi-single", EviSingle);
+customElements.define("view-single", ViewSingle);

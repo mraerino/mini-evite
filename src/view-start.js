@@ -1,11 +1,11 @@
 import { Element as PolymerElement } from "../node_modules/@polymer/polymer/polymer-element.js";
 
-export class EviStart extends PolymerElement {
+export class ViewStart extends PolymerElement {
   static get template() {
     return `
-    [[ eventData.name ]]
+    Hallo Welt
     `;
   }
 }
 
-customElements.define("evi-start", EviStart);
+customElements.define("view-start", ViewStart);

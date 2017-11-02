@@ -4,8 +4,9 @@ import "../node_modules/@polymer/paper-styles/color.js";
 import "../node_modules/@polymer/iron-pages/iron-pages.js";
 
 import firebaseConfig from "../firebase.config.js";
-import "./evi-single.js";
-import "./evi-login.js";
+import "./view-start.js";
+import "./view-single.js";
+import "./view-login.js";
 
 export class AppShell extends PolymerElement {
   constructor() {
@@ -28,8 +29,8 @@ export class AppShell extends PolymerElement {
     this._router = new Navigo(location.origin)
       .on({
         '/': rx('start'),
-        '/events/:eventId': rx('event-single'),
-        '/login': rx('login')
+        '/login': rx('login'),
+        '/:eventId': rx('event-single'),
       })
       .notFound(rx("404"));
   }
@@ -66,9 +67,9 @@ export class AppShell extends PolymerElement {
       }
     </style>
     <iron-pages selected="[[ currentView ]]" attr-for-selected="view">
-      <div view="start">Welcome!</div>
-      <evi-single view="event-single" event-id="[[ routeParams.eventId ]]"></evi-single>
-      <evi-login view="login"></evi-login>
+      <view-start view="start"></view-start>
+      <view-login view="login"></view-login>
+      <view-single view="event-single" event-id="[[ routeParams.eventId ]]"></view-single>
     </iron-pages>
     `
   }
