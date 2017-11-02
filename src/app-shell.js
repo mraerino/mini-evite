@@ -39,11 +39,6 @@ export class AppShell extends PolymerElement {
 
     // Initialize Firebase
     firebase.auth().getRedirectResult().catch(err => console.log("Login/Signup failed with", err));
-    firebase.auth().onAuthStateChanged(user => {
-      if(!user) {
-        this._router.navigate('/login');
-      }
-    });
 
     // resolve route
     this._router.resolve();

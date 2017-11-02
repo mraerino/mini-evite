@@ -9,15 +9,6 @@ export class EviLogin extends GestureEventListeners(PolymerElement) {
 
   connectedCallback() {
     this._provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().onAuthStateChanged(user => {
-      if(user) {
-        this.dispatchEvent(new CustomEvent('redirect', {
-          detail: { path: '/' },
-          bubbles: true,
-          composed: true
-        }))
-      }
-    });
   }
 
   static get properties() {
