@@ -3,8 +3,8 @@ import {EventDataActions} from "./event-data";
 import {UserDataActions} from "./auth-data";
 
 export enum ActionTypes {
-    USER_DATA_RESULT = "USER_DATA_RESULT",
-    FETCH_EVENT_RESULT = "FETCH_EVENT_RESULT"
+    USER_DATA_CHANGED = "USER_DATA_CHANGED",
+    FETCH_EVENT_CHANGED = "FETCH_EVENT_CHANGED"
 }
 
 export type RouterActions =

@@ -15,12 +15,12 @@ export function initAuth(): ThunkAction<void, State, void> {
 }
 
 export interface UserDataResultAction {
-    type: ActionTypes.USER_DATA_RESULT,
+    type: ActionTypes.USER_DATA_CHANGED,
     payload: firebaseNS.User | null
 }
 export function userDataResult(user: firebaseNS.User | null): UserDataResultAction {
     return {
-        type: ActionTypes.USER_DATA_RESULT,
+        type: ActionTypes.USER_DATA_CHANGED,
         payload: user
     }
 }

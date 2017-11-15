@@ -45,13 +45,13 @@ export function fetchEvent(): ThunkAction<void, State, void> {
 }
 
 export interface FetchEventResultAction {
-    type: ActionTypes.FETCH_EVENT_RESULT,
+    type: ActionTypes.FETCH_EVENT_CHANGED,
     payload: EventData
 }
 
 export function fetchEventResult(data: EventData): FetchEventResultAction {
     return {
-        type: ActionTypes.FETCH_EVENT_RESULT,
+        type: ActionTypes.FETCH_EVENT_CHANGED,
         payload: data
     }
 }
