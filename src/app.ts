@@ -4,12 +4,13 @@ import { views, resultSelector } from "./routing";
 import "./provider"
 import "./util/firebase";
 import "./views/view-home";
+import "./views/view-event";
 import "@polymer/paper-styles/color";
 
 const viewMap = (view: views, props): TemplateResult => {
     return {
         [views.home]: html`<view-home></view-home>`,
-        [views.event]: html`<p>Event: ${props.eventId}</p>`,
+        [views.event]: html`<view-event></view-event>`,
         [views.invite]: html`<p>Invite: ${props.inviteId}</p>`,
         [views.notFound]: html`<p>Not found!</p>`
     }[view];
