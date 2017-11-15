@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.ts",
   "author": "Marcus Weiner <marcus.weiner@gmail.com>",
+  "repository": "mraerino/mini-evite",
   "license": "MIT",
   "private": true,
   "dependencies": {
