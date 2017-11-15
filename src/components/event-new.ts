@@ -95,7 +95,7 @@ const EventNew = connect(
         </style>
     </custom-style>
 
-    <paper-card id="eventDetails">
+    <paper-card id="eventDetails" elevation="2">
       <div class="card-heading">
         <paper-input no-label-float label="Event Title"></paper-input>
       </div>
