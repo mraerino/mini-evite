@@ -52,7 +52,8 @@ export default {
                 baseDir: dist(),
                 middleware: [ historyApi() ]
             },
-            open: false
+            open: false,
+            ui: false
         }) : null
     ].filter(plugin => plugin !== null),
     watch: {
