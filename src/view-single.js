@@ -1,4 +1,6 @@
 import { Element as PolymerElement } from "../node_modules/@polymer/polymer/polymer-element.js";
+import * as firebase from "firebase";
+import "firebase/firestore";
 import "../node_modules/@polymer/paper-item/paper-icon-item.js";
 import "../node_modules/@polymer/paper-item/paper-item-body.js";
 import "../node_modules/@polymer/iron-icon/iron-icon.js";
@@ -11,7 +13,6 @@ export class ViewSingle extends PolymerElement {
   constructor() {
     super();
 
-    this._db = firebase.firestore;
     this._eventSub = null;
   }
 
@@ -135,7 +136,7 @@ export class ViewSingle extends PolymerElement {
       return;
     }
 
-    this._eventSub = this._db().collection("events").doc(eventId)
+    this._eventSub = firebase.firestore.collection("events").doc(eventId)
       .onSnapshot(snap => this.eventData = snap.exists ? snap.data() : {});
   }
 }

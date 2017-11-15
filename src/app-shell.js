@@ -1,5 +1,7 @@
 import { Element as PolymerElement } from "../node_modules/@polymer/polymer/polymer-element.js";
 import Navigo from "../node_modules/navigo/src/index.js";
+import firebase from "firebase/app";
+import "firebase/auth";
 import "../node_modules/@polymer/paper-styles/color.js";
 import "../node_modules/@polymer/iron-pages/iron-pages.js";
 

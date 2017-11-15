@@ -1,5 +1,7 @@
 import {Element as PolymerElement} from "../node_modules/@polymer/polymer/polymer-element.js";
 import { GestureEventListeners } from "../node_modules/@polymer/polymer/lib/mixins/gesture-event-listeners.js"
+import firebase from "firebase/app";
+import "firebase/auth";
 import "../node_modules/@polymer/paper-button/paper-button.js";
 
 export class ViewLogin extends GestureEventListeners(PolymerElement) {

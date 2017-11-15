@@ -1,6 +1,7 @@
 node_modules/
 
 dist/
+/.tmp/
 
 .firebaserc
 firebase.config.js
