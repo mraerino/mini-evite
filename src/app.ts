@@ -36,7 +36,6 @@ const AppBase = connect(
     props => html`
     <style>
       @import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
-      @import url('/node_modules/normalize-css/normalize.css');
     
       :host {
         --primary: var(--google-blue-500);

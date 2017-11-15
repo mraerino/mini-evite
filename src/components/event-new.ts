@@ -21,7 +21,6 @@ const EventNew = connect(
         display: block;
         max-width: 600px;
         margin: 0 auto;
-        padding: 20px;
       }
       
       paper-card {
@@ -33,6 +32,10 @@ const EventNew = connect(
         background-color: var(--primary);
       }
       
+      .card-content {
+        padding: 16px 0;
+      }
+
       .datetime paper-item-body {
         display: flex;
         min-height: 26px;
@@ -73,6 +76,15 @@ const EventNew = connect(
       .card-actions paper-button {
         color: white;
       }
+
+      @media (max-device-width: 600px) {
+        .range label {
+            display: none;
+        }
+        .range paper-input:first-of-type {
+            margin-left: 0;
+        }
+      }
     </style>
     <custom-style>
         <style>
@@ -101,21 +113,21 @@ const EventNew = connect(
       </div>
       <div class="card-content">
         <div role="listbox">
-          <paper-icon-item class="datetime">
+          <paper-icon-item class="datetime full-day">
             <iron-icon icon="schedule" slot="item-icon"></iron-icon>
             <paper-item-body>
                 <label for="toggle-fullday">Ganztägig</label>
                 <paper-toggle-button id="toggle-fullday"></paper-toggle-button>              
             </paper-item-body>
           </paper-icon-item>
-          <paper-icon-item class="datetime">
+          <paper-icon-item class="datetime range">
             <paper-item-body>
                 <label>Von</label>
                 <paper-input label="DD.MM.YYYY" no-label-float></paper-input>
                 <paper-input label="HH:MM" no-label-float></paper-input>
             </paper-item-body>
           </paper-icon-item>
-          <paper-icon-item class="datetime">
+          <paper-icon-item class="datetime range">
             <paper-item-body>
                 <label>Bis</label>
                 <paper-input label="DD.MM.YYYY" no-label-float></paper-input>
