@@ -80,17 +80,17 @@ const EventNew = connect(
             --paper-input-container-input: {
               color: white;
               font-size: 24px;
-            }
+            };
             --paper-input-container-label: {
               color: rgba(255,255,255,0.8);
               font-size: 24px;
-            }
+            };
             --paper-input-container-underline: {
               border-bottom-color: rgba(255,255,255,0.8);
-            }
+            };
             --paper-input-container-underline-focus: {
               border-bottom-color: white;
-            }
+            };
           }
         </style>
     </custom-style>
