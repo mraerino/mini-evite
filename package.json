@@ -16,6 +16,7 @@
     "@polymer/paper-toggle-button": "^3.0.0-pre.1",
     "@polymer/polymer": "^3.0.0-pre.1",
     "@webcomponents/shadycss": "^1.0.6",
+    "firebase": "^4.6.2",
     "fit-html": "^0.1.2",
     "lit-html": "^0.7.1",
     "navigo": "^5.3.3",

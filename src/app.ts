@@ -5,8 +5,11 @@ import { applyMiddleware, createStore, Store } from 'redux';
 import thunk from 'redux-thunk';
 import reducer, { State, initialState } from './reducer/main';
 import { initRouting, views } from "./actions/route";
+import firebase from "@firebase/app";
 import "./views/view-home";
 import "@polymer/paper-styles/color";
+
+import firebaseConfig from "../firebase.config.js";
 
 // Create redux store
 const store = createStore(
@@ -25,6 +28,9 @@ const viewMap = (view: views, props): TemplateResult => {
         [views.notFound]: html`<p>Not found!</p>`
     }[view];
 };
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
 const AppBase = connect(
     state => ({

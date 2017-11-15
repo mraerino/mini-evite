@@ -5,3 +5,5 @@ dist/
 
 /tools/*.cjs.js
 /tools/*.es.js
+
+/firebase.config.js
