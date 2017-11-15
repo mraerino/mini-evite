@@ -1,8 +1,16 @@
-import { ActionTypes as RouteTypes } from "./route";
+import { push, replace, go, goBack, goForward, replaceRoutes, initializeCurrentLocation } from "redux-little-router-reactless";
 
-export enum ActionTypeKeys {
-    SET_VIEW = "SET_VIEW"
+export enum ActionTypes {
 }
 
-export type ActionTypes =
-    | RouteTypes;
+export type RouterActions =
+    | typeof push
+    | typeof replace
+    | typeof go
+    | typeof goBack
+    | typeof goForward
+    | typeof replaceRoutes
+    | typeof initializeCurrentLocation;
+
+export type Actions =
+    | RouterActions;

@@ -19,9 +19,10 @@
     "firebase": "^4.6.2",
     "fit-html": "^0.1.2",
     "lit-html": "^0.7.1",
-    "navigo": "^5.3.3",
     "normalize-css": "^2.3.1",
     "redux": "^3.7.2",
+    "redux-devtools-extension": "^2.13.2",
+    "redux-little-router-reactless": "../../Festify/redux-little-router-reactless",
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {

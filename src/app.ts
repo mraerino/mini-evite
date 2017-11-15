@@ -1,22 +1,10 @@
 import { connect, html } from './util/defaults';
-import { createProvider, ProviderElement } from 'fit-html';
 import { TemplateResult } from "lit-html";
-import { applyMiddleware, createStore, Store } from 'redux';
-import thunk from 'redux-thunk';
-import reducer, { State, initialState } from './reducer/main';
-import { initRouting, views } from "./actions/route";
+import { views, resultSelector } from "./routing";
+import "./provider"
 import "./util/firebase";
 import "./views/view-home";
 import "@polymer/paper-styles/color";
-
-// Create redux store
-const store = createStore(
-    reducer,
-    initialState,
-    applyMiddleware(thunk)
-);
-const Provider = createProvider(store);
-customElements.define('redux-provider', Provider);
 
 const viewMap = (view: views, props): TemplateResult => {
     return {
@@ -29,9 +17,7 @@ const viewMap = (view: views, props): TemplateResult => {
 
 const AppBase = connect(
     state => ({
-        view: state.routing.view,
-        eventId: state.routing.params.slug || "",
-        inviteId: state.routing.params.inviteId || ""
+        view: resultSelector(state, 'view', views.notFound)
     }),
     {},
     props => html`
@@ -51,7 +37,7 @@ const AppBase = connect(
 class AppView extends AppBase {
     connectedCallback() {
         super.connectedCallback();
-        this.getStore().dispatch(initRouting());
     }
 }
+
 customElements.define('app-shell', AppView);
