@@ -6,6 +6,7 @@ import {
     initRouting
 } from './routing';
 import { Location } from 'redux-little-router-reactless';
+import middlewares from './middlewares';
 import { devToolsEnhancer } from 'redux-devtools-extension/logOnlyInProduction';
 
 export interface State {
@@ -21,7 +22,7 @@ const store = createStore(
         router: routerReducer
     }),
     initialState,
-    compose(routerEnhancer, applyMiddleware(thunk, routerMiddleware), devToolsEnhancer({}))
+    compose(routerEnhancer, applyMiddleware(thunk, routerMiddleware, ...middlewares), devToolsEnhancer({}))
 );
 store.dispatch(initRouting());
 
