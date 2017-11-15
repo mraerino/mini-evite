@@ -1,4 +1,4 @@
-import { routerForBrowser, initializeCurrentLocation, Routes } from "redux-little-router-reactless";
+import { routerForBrowser, initializeCurrentLocation, Routes } from "@mraerino/redux-little-router-reactless";
 import { ThunkAction } from "redux-thunk";
 import { State } from "./provider";
 

@@ -1,4 +1,4 @@
-import { LOCATION_CHANGED } from "redux-little-router-reactless";
+import { LOCATION_CHANGED } from "@mraerino/redux-little-router-reactless";
 import { fetchEvent } from "../actions/event-data";
 import {paramSelector} from "../routing";
 

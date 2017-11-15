@@ -5,7 +5,7 @@ import nodeGlobals from 'rollup-plugin-node-globals';
 import nodeBuiltins from 'rollup-plugin-node-builtins';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import typescript from 'rollup-plugin-typescript2';
-import minifyLit from 'rollup-plugin-minifyliterals';
+import minifyLit from '@mraerino/rollup-plugin-minifyliterals';
 import browsersync from 'rollup-plugin-browsersync';
 import historyApi from 'connect-history-api-fallback';
 import path from 'path';

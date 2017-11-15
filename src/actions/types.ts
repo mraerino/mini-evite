@@ -1,4 +1,4 @@
-import { push, replace, go, goBack, goForward, replaceRoutes, initializeCurrentLocation } from "redux-little-router-reactless";
+import { push, replace, go, goBack, goForward, replaceRoutes, initializeCurrentLocation } from "@mraerino/redux-little-router-reactless";
 import {EventDataActions} from "./event-data";
 import {UserDataActions} from "./auth-data";
 

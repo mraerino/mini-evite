@@ -5,7 +5,7 @@ import {
     reducer as routerReducer, middleware as routerMiddleware, enhancer as routerEnhancer,
     initRouting
 } from './routing';
-import { Location } from 'redux-little-router-reactless';
+import { Location } from '@mraerino/redux-little-router-reactless';
 import middlewares from './middlewares';
 import { devToolsEnhancer } from 'redux-devtools-extension/logOnlyInProduction';
 

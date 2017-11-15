@@ -6,6 +6,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "@mraerino/redux-little-router-reactless": "^14.3.0",
     "@polymer/iron-icon": "^3.0.0-pre.1",
     "@polymer/iron-icons": "^3.0.0-pre.1",
     "@polymer/paper-button": "^3.0.0-pre.1",
@@ -22,12 +23,12 @@
     "normalize-css": "^2.3.1",
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.2",
-    "redux-little-router-reactless": "../../Festify/redux-little-router-reactless",
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.32",
     "@babel/preset-env": "^7.0.0-beta.32",
+    "@mraerino/rollup-plugin-minifyliterals": "^1.1.0",
     "babel-register": "^6.26.0",
     "connect-history-api-fallback": "^1.5.0",
     "rollup": "^0.51.5",
@@ -35,7 +36,6 @@
     "rollup-plugin-browsersync": "^0.2.6",
     "rollup-plugin-commonjs": "^8.2.6",
     "rollup-plugin-copy": "^0.2.3",
-    "rollup-plugin-minifyliterals": "../../mraerino/rollup-plugin-minifyliterals",
     "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-globals": "^1.1.0",
     "rollup-plugin-node-resolve": "^3.0.0",
