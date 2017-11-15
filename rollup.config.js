@@ -2,6 +2,7 @@ import minify from 'rollup-plugin-babel-minify';
 import cjs from 'rollup-plugin-commonjs';
 import copy from 'rollup-plugin-copy';
 import nodeGlobals from 'rollup-plugin-node-globals';
+import nodeBuiltins from 'rollup-plugin-node-builtins';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import typescript from 'rollup-plugin-typescript2';
 import minifyLit from 'rollup-plugin-minifyliterals';
@@ -25,17 +26,18 @@ export default {
         sourcemap: !isProduction
     },
     plugins: [
-        nodeGlobals(),
+        nodeBuiltins(),
         nodeResolve({
             jsnext: true,
             main: true
         }),
-        cjs(),
         typescript(),
         copy({
             [src('index.html')]: dist('index.html'),
             './node_modules/normalize-css/normalize.css': dist('node_modules/normalize-css/normalize.css'),
         }),
+        cjs(),
+        nodeGlobals(),
         isProduction ? minifyLit({
             exclude: "node_modules/**",
             includeExtension: ['.ts', '.js'],
