@@ -3,6 +3,7 @@ import {ThunkAction} from "redux-thunk";
 import {State} from "../provider";
 import {ActionTypes} from "./types";
 import {paramSelector} from "../routing";
+import {requireAuth} from "../util/auth";
 
 export type EventDataActions =
     | FetchEventResultAction
@@ -25,19 +26,21 @@ export type EventData = EventDataInterface | {};
 let dataUnsubscribe: (() => void) | null = null;
 export function fetchEvent(): ThunkAction<void, State, void> {
     return (dispatch, getState) => {
-        // unregister former listener
-        if(dataUnsubscribe) {
-            dataUnsubscribe();
-            dataUnsubscribe = null;
-        }
+        requireAuth().then(() => {
+            // unregister former listener
+            if(dataUnsubscribe) {
+                dataUnsubscribe();
+                dataUnsubscribe = null;
+            }
 
-        const eventId = paramSelector(getState(), 'slug');
-        if(eventId === "") {
-            return;
-        }
+            const eventId = paramSelector(getState(), 'slug');
+            if(eventId === "") {
+                return;
+            }
 
-        dataUnsubscribe = firebase.firestore().collection("events").doc(eventId)
-            .onSnapshot(snap => dispatch(fetchEventResult(snap.exists ? snap.data() : {})));
+            dataUnsubscribe = firebase.firestore().collection("events").doc(eventId)
+                .onSnapshot(snap => dispatch(fetchEventResult(snap.exists ? snap.data() : {})));
+        });
     }
 }
 

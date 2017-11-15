@@ -6,25 +6,19 @@ import {ActionTypes} from "./types";
 export type UserDataActions =
     | UserDataResultAction;
 
+let authUnsubscribe = () => {};
 export function initAuth(): ThunkAction<void, State, void> {
     return dispatch => {
-        firebase.auth().signInAnonymously().catch(error => {
-            // Handle Errors here.
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.error(errorMessage);
-            // todo: dispatch as toast
-        });
-
-        firebase.auth().onAuthStateChanged(user => dispatch(userDataResult(user)));
+        authUnsubscribe();
+        authUnsubscribe = firebase.auth().onAuthStateChanged(user => dispatch(userDataResult(user)));
     }
 }
 
 export interface UserDataResultAction {
     type: ActionTypes.USER_DATA_RESULT,
-    payload: firebaseNS.auth.User | null
+    payload: firebaseNS.User | null
 }
-export function userDataResult(user: firebaseNS.auth.User | null): UserDataResultAction {
+export function userDataResult(user: firebaseNS.User | null): UserDataResultAction {
     return {
         type: ActionTypes.USER_DATA_RESULT,
         payload: user
