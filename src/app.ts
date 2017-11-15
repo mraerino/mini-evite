@@ -1,6 +1,7 @@
 import { connect, html } from './util/defaults';
 import { TemplateResult } from "lit-html";
 import { views, resultSelector } from "./routing";
+import { initAuth } from "./actions/auth-data";
 import "./provider"
 import "./util/firebase";
 import "./views/view-home";
@@ -38,6 +39,7 @@ const AppBase = connect(
 class AppView extends AppBase {
     connectedCallback() {
         super.connectedCallback();
+        this.getStore().dispatch(initAuth());
     }
 }
 
