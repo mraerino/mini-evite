@@ -32,6 +32,7 @@ const AppBase = connect(
         flex-direction: column;
         background-image: url('https://source.unsplash.com/S2YssLw97l4/1000');
         background-size: cover;
+        background-position: center;
         min-height: 100vh;
       }
 
@@ -43,14 +44,9 @@ const AppBase = connect(
         font-family: 'Yellowtail', cursive;
         margin: 10px 30px;
         color: white;
+        opacity: 0.8;
         font-size: 50px;
         text-align: left;
-        --outline-width: 2px;
-        text-shadow:
-            calc(-1*var(--outline-width)) calc(-1*var(--outline-width)) 3px black,
-            calc(-1*var(--outline-width)) var(--outline-width) 3px black,
-            var(--outline-width) calc(-1*var(--outline-width)) 3px black,
-            var(--outline-width) var(--outline-width) 3px black;
       }
 
       main {
