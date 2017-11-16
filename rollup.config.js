@@ -46,14 +46,14 @@ export default {
         }),
         cjs(),
         nodeGlobals(),
-        isProduction ? minifyLit({
+        /*isProduction ? minifyLit({
             exclude: "node_modules/**",
             includeExtension: ['.ts', '.js'],
             htmlminifier: {
                 minifyCSS: false, // causes some kind of trouble currently
                 collapseWhitespace: true
             }
-        }) : null,
+        }) : null,*/
         isProduction ? minify({ comments: false }) : null,
         !!process.env.ROLLUP_WATCH ? browsersync({
             server: {
