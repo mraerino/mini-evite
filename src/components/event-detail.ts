@@ -26,11 +26,14 @@ const EventDetail = connect(
         display: block;
         max-width: 600px;
         margin: 0 auto;
-        padding: 20px;
       }
 
       paper-card {
         display: block;
+      }
+
+      .card-content {
+        padding: 16px 0;
       }
 
       .avatar {
