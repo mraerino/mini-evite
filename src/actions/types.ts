@@ -16,7 +16,7 @@ export type RouterActions =
     | typeof replaceRoutes
     | typeof initializeCurrentLocation;
 
-export type Actions =
+export type Action =
     | RouterActions
     | EventDataActions
     | UserDataActions;

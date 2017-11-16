@@ -8,18 +8,21 @@ import {
 import { Location } from '@mraerino/redux-little-router-reactless';
 import middlewares from './middlewares';
 import { devToolsEnhancer } from 'redux-devtools-extension/logOnlyInProduction';
+import { appReducer, AppState, initialState as initialAppState } from './reducer';
 
-export interface State {
+export interface State extends AppState {
     router?: Location
 }
 
 export const initialState: State = {
+    ...initialAppState
 };
 
 // Create redux store
 const store = createStore(
     combineReducers({
-        router: routerReducer
+        router: routerReducer,
+        ...appReducer
     }),
     initialState,
     compose(routerEnhancer, applyMiddleware(thunk, routerMiddleware, ...middlewares), devToolsEnhancer({}))

@@ -4,24 +4,10 @@ import {State} from "../provider";
 import {ActionTypes} from "./types";
 import {paramSelector} from "../routing";
 import {requireAuth} from "../util/auth";
+import {EventData} from "../reducer/event";
 
 export type EventDataActions =
     | FetchEventResultAction
-
-export interface EventDataInterface {
-    name: String,
-    times: {
-        starts_at: Date,
-        ends_at: Date,
-        full_day: boolean
-    },
-    location: {
-        address?: String,
-        gmaps_url?: String,
-        name: String
-    }
-}
-export type EventData = EventDataInterface | {};
 
 let dataUnsubscribe: (() => void) | null = null;
 export function fetchEvent(): ThunkAction<void, State, void> {
