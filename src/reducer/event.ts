@@ -13,14 +13,26 @@ export interface EventDataInterface {
         name: String
     }
 }
-export type EventData = EventDataInterface | {};
+export type EventData = EventDataInterface | null;
 
 export interface EventState {
     current: EventData
 }
 
 export const initialState: EventState = {
-    current: {}
+    current: null
+};
+
+export const emptyEvent: EventDataInterface = {
+    name: "",
+    location: {
+        name: ""
+    },
+    times: {
+        starts_at: new Date(0),
+        ends_at: new Date(0),
+        full_day: false
+    }
 };
 
 export default function eventReducer(
