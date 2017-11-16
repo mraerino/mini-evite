@@ -7,7 +7,6 @@ const ViewHome = connect(
     },
     {},
     props => html`
-    <h2>Welcome Home</h2>
     <event-new></event-new>
     `
 );
