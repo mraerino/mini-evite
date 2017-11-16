@@ -43,6 +43,7 @@ export default {
         copy({
             [src('index.html')]: dist('index.html'),
             './node_modules/normalize-css/normalize.css': dist('node_modules/normalize-css/normalize.css'),
+            './_redirects': dist('_redirects')
         }),
         cjs(),
         nodeGlobals(),
