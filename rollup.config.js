@@ -47,14 +47,15 @@ export default {
         }),
         cjs(),
         nodeGlobals(),
-        /*isProduction ? minifyLit({
-            exclude: "node_modules/**",
+        isProduction ? minifyLit({
+            include: ['src/app.ts', 'src/{components,views}/**', 'node_modules/@polymer/{paper,iron}-*/**'],
             includeExtension: ['.ts', '.js'],
+            literals: false,
             htmlminifier: {
-                minifyCSS: false, // causes some kind of trouble currently
+                minifyCSS: true, // causes some kind of trouble currently
                 collapseWhitespace: true
             }
-        }) : null,*/
+        }) : null,
         isProduction ? minify({ comments: false }) : null,
         !!process.env.ROLLUP_WATCH ? browsersync({
             server: {

@@ -485,9 +485,9 @@
     recompose "^0.26.0"
     url-pattern "^1.0.3"
 
-"@mraerino/rollup-plugin-minifyliterals@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@mraerino/rollup-plugin-minifyliterals/-/rollup-plugin-minifyliterals-1.1.0.tgz#ecfd4b8da0b1133e3c72cf9c2f337cfc529d4a5b"
+"@mraerino/rollup-plugin-minifyliterals@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@mraerino/rollup-plugin-minifyliterals/-/rollup-plugin-minifyliterals-1.2.0.tgz#b382613b334be185ed036710db8801189a620bbf"
   dependencies:
     acorn "^3.1.0"
     estree-walker "^0.2.1"
