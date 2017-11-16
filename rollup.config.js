@@ -9,6 +9,7 @@ import minifyLit from '@mraerino/rollup-plugin-minifyliterals';
 import browsersync from 'rollup-plugin-browsersync';
 import historyApi from 'connect-history-api-fallback';
 import path from 'path';
+import fs from 'fs';
 
 const distTarget = './dist';
 const dist = (dest = "") => path.join(distTarget, dest);
@@ -17,6 +18,13 @@ const srcTarget = './src';
 const src = (dest = "") => path.join(srcTarget, dest);
 
 const isProduction = process.env.NODE_ENV === 'production';
+
+// load firebase config from ENV
+const firebaseConfigPath = "./firebase.config.js";
+if(process.env.FIREBASE_CONFIG) {
+    const data = JSON.parse(process.env.FIREBASE_CONFIG);
+    fs.writeFileSync(firebaseConfigPath, `export default ${JSON.stringify(data, null, 4)}`);
+}
 
 export default {
     input: src('app.ts'),
