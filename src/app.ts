@@ -27,10 +27,47 @@ const AppBase = connect(
       :host {
         --primary: var(--google-blue-500);
         font-family: 'Roboto', sans-serif;
+
+        display: flex;
+        flex-direction: column;
+        background-image: url('https://source.unsplash.com/S2YssLw97l4/1000');
+        background-size: cover;
+        min-height: 100vh;
+      }
+
+      header {
+        margin-bottom: 20px;
+      }
+
+      h1 {
+        font-family: 'Yellowtail', cursive;
+        margin: 10px 30px;
+        color: white;
+        font-size: 50px;
+        text-align: left;
+        --outline-width: 2px;
+        text-shadow:
+            calc(-1*var(--outline-width)) calc(-1*var(--outline-width)) 3px black,
+            calc(-1*var(--outline-width)) var(--outline-width) 3px black,
+            var(--outline-width) calc(-1*var(--outline-width)) 3px black,
+            var(--outline-width) var(--outline-width) 3px black;
+      }
+
+      main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
       }
     </style>
-    <h1>Mini Evite</h1>
-    ${viewMap(props.view, props)}
+
+    <header>
+        <h1>Mini Evite</h1>
+    </header>
+
+    <main>
+        ${viewMap(props.view, props)}
+    </main>
     `
 );
 
