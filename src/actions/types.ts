@@ -2,7 +2,7 @@ import { push, replace, go, goBack, goForward, replaceRoutes, initializeCurrentL
 import {EventDataActions} from "./event-data";
 import {UserDataActions} from "./auth-data";
 
-export enum ActionTypes {
+export const enum ActionTypes {
     USER_DATA_CHANGED = "USER_DATA_CHANGED",
     FETCH_EVENT_CHANGED = "FETCH_EVENT_CHANGED"
 }
