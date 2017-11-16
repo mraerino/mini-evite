@@ -19,10 +19,12 @@ export interface EventState {
     current: EventData
 }
 
+export const initialState: EventState = {
+    current: {}
+};
+
 export default function eventReducer(
-    state: EventState = {
-        current: {}
-    },
+    state: EventState = initialState,
     action: Action
 ): EventState {
     if(action.type === ActionTypes.FETCH_EVENT_CHANGED) {

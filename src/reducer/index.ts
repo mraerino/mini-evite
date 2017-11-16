@@ -1,17 +1,19 @@
-import eventReducer, { EventState } from "./event";
-export { EventState };
+import eventReducer, { EventState, initialState as initialEvent } from "./event";
+import userReducer, { UserState, initialState as initialUser } from "./user";
+export { EventState, UserState };
 
 export interface AppState {
-    event: EventState
+    event: EventState,
+    user: UserState
 }
 export const initialState: AppState = {
-    event: {
-        current: {}
-    }
+    event: initialEvent,
+    user: initialUser
 };
 
 export const appReducer = {
-    event: eventReducer
+    event: eventReducer,
+    user: userReducer
 };
 
 export default appReducer;

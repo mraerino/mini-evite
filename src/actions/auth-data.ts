@@ -2,6 +2,7 @@ import { firebase, firebaseNS } from "../util/firebase";
 import {ThunkAction} from "redux-thunk";
 import {State} from "../provider";
 import {ActionTypes} from "./types";
+import {CurrentFirebaseUser} from "../reducer/user";
 
 export type UserDataActions =
     | UserDataResultAction;
@@ -16,9 +17,9 @@ export function initAuth(): ThunkAction<void, State, void> {
 
 export interface UserDataResultAction {
     type: ActionTypes.USER_DATA_CHANGED,
-    payload: firebaseNS.User | null
+    payload: CurrentFirebaseUser
 }
-export function userDataResult(user: firebaseNS.User | null): UserDataResultAction {
+export function userDataResult(user: CurrentFirebaseUser): UserDataResultAction {
     return {
         type: ActionTypes.USER_DATA_CHANGED,
         payload: user
