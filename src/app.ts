@@ -24,8 +24,6 @@ const AppBase = connect(
     {},
     props => html`
     <style>
-      @import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
-    
       :host {
         --primary: var(--google-blue-500);
         font-family: 'Roboto', sans-serif;
