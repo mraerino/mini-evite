@@ -74,7 +74,7 @@ const EventDetail = connect(
         }
       </style>
     </custom-style>
-    <paper-card heading="${props.data.name}" id="eventDetails">
+    <paper-card heading="${props.data.name}" id="eventDetails" elevation="4">
       <div class="card-content">
         <div role="listbox">
           <paper-icon-item>
