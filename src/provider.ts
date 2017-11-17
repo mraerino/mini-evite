@@ -9,19 +9,22 @@ import { Location } from '@mraerino/redux-little-router-reactless';
 import middlewares from './middlewares';
 import { devToolsEnhancer } from 'redux-devtools-extension/logOnlyInProduction';
 import { appReducer, AppState, initialState as initialAppState } from './reducer';
+import {formReducer, StateWithForm} from "./util/forms";
 
-export interface State extends AppState {
+export interface State extends AppState, StateWithForm {
     router?: Location
 }
 
 export const initialState: State = {
-    ...initialAppState
+    ...initialAppState,
+    forms: {}
 };
 
 // Create redux store
 const store = createStore(
     combineReducers({
         router: routerReducer,
+        forms: formReducer,
         ...appReducer
     }),
     initialState,

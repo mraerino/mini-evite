@@ -1,4 +1,5 @@
 import {connect, html} from "../util/defaults";
+import {FitFormElementProps, withForm} from "../util/forms";
 import "@polymer/paper-button/paper-button";
 import "@polymer/paper-card/paper-card";
 import "@polymer/paper-item/paper-icon-item";
@@ -10,12 +11,25 @@ import "@polymer/iron-icons/iron-icons";
 import "@polymer/paper-toggle-button/paper-toggle-button";
 import "@webcomponents/shadycss/entrypoints/apply-shim";
 import "@polymer/polymer/lib/elements/custom-style";
+import {FitElement} from "fit-html";
+import {State} from "../provider";
 
-const EventNew = connect(
-    state => {
+export interface EventNewProps {
+}
+
+const EventNew = withForm(
+    "event-new",
+    {
+        name: value => ({
+            inputValue: value,
+            storedValue: value,
+            valid: value !== ""
+        })
     },
+connect<State, EventNewProps, {}>(
+    (state: State, ownProps: {}, hostElement: FitElement<State, EventNewProps, {}>): EventNewProps => ({}),
     {},
-    props => html`
+    (props: FitFormElementProps<EventNewProps>) => html`
     <style>
       :host {
         display: block;
@@ -32,6 +46,10 @@ const EventNew = connect(
         background-color: var(--primary);
       }
       
+      .invalid .card-heading {
+        background-color: darkred;
+      }
+
       .card-content {
         padding: 16px 0;
       }
@@ -72,6 +90,10 @@ const EventNew = connect(
         justify-content: flex-end;
         background-color: var(--primary);
       }
+
+      .invalid .card-actions {
+        background-color: darkred;
+      }
       
       .card-actions paper-button {
         color: white;
@@ -107,9 +129,11 @@ const EventNew = connect(
         </style>
     </custom-style>
 
-    <paper-card id="eventDetails" elevation="2">
+    <paper-card id="eventDetails" class$="${props.form.valid ? 'valid' : 'invalid'}" elevation="2">
       <div class="card-heading">
-        <paper-input no-label-float label="Event Title"></paper-input>
+        <paper-input name="name" no-label-float label="Event Title"
+            on-change="${e => props.form.handle(e, e.target.value)}">
+        </paper-input>
       </div>
       <div class="card-content">
         <div role="listbox">
@@ -150,9 +174,9 @@ const EventNew = connect(
         </div>
       </div>
       <div class="card-actions">
-        <paper-button>Erstellen</paper-button>
+        <paper-button on-click="${() => props.form.submit({ type: null })}">Erstellen</paper-button>
       </div>
     </paper-card>
     `
-);
+) as FitElement<State, FitFormElementProps<EventNewProps>, {}>);
 customElements.define('event-new', EventNew);
