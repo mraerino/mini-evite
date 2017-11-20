@@ -224,6 +224,12 @@ export function formReducer(state: FitFormState = {}, action: FormActions): FitF
             console.warn("Change on form missing field transformer");
         }
         const output: FormTransformResult = form[fieldName](value);
+
+        // dirty checking
+        if(state[formId].fields[fieldName].inputValue === output.inputValue) {
+            return state;
+        }
+
         const fields = {
             ...state[formId].fields,
             [fieldName]: {
