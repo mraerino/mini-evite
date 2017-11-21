@@ -21,11 +21,25 @@ export interface EventNewProps {
 const v = validator => value => ({
     valid: validator(value)
 });
+const dateMatcher = /^(\d{2}).(\d{2}).(\d{4})$/;
+const validDate = value =>
+    dateMatcher.test(value) && value
+        .match(dateMatcher).slice(1)
+        .every((val, i) => i == 0 ? parseInt(val) <= 31 : (i == 1 ? parseInt(val) <= 12 : true));
+const validTime = value => /^[0-2]?\d:[0-5]\d$/.test(value);
 
 const EventNew = withForm(
     "event-new",
     {
-        name: v(value => value !== "")
+        name: v(value => value !== ""),
+        fullDay: value => ({
+            inputValue: !!value,
+            valid: true
+        }),
+        startDate: v(validDate),
+        startTime: v(validTime),
+        endDate: v(validDate),
+        endTime: v(validTime)
     },
 connect<State, EventNewProps, {}>(
     (state: State, ownProps: {}, hostElement: FitElement<State, EventNewProps, {}>): EventNewProps => ({}),
@@ -146,15 +160,15 @@ connect<State, EventNewProps, {}>(
           <paper-icon-item class="datetime range">
             <paper-item-body>
                 <label>Von</label>
-                <paper-input label="DD.MM.YYYY" no-label-float></paper-input>
-                <paper-input label="HH:MM" no-label-float></paper-input>
+                ${decorateInput(html`<paper-input label="DD.MM.YYYY" no-label-float></paper-input>`, 'startDate', props)}
+                ${decorateInput(html`<paper-input label="HH:MM" no-label-float></paper-input>`, 'startTime', props)}
             </paper-item-body>
           </paper-icon-item>
           <paper-icon-item class="datetime range">
             <paper-item-body>
                 <label>Bis</label>
-                <paper-input label="DD.MM.YYYY" no-label-float></paper-input>
-                <paper-input label="HH:MM" no-label-float></paper-input>
+                ${decorateInput(html`<paper-input label="DD.MM.YYYY" no-label-float></paper-input>`, 'endDate', props)}
+                ${decorateInput(html`<paper-input label="HH:MM" no-label-float></paper-input>`, 'endTime', props)}
             </paper-item-body>
           </paper-icon-item>
           <paper-icon-item>
