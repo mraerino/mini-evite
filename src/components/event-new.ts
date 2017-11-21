@@ -13,6 +13,7 @@ import "@webcomponents/shadycss/entrypoints/apply-shim";
 import "@polymer/polymer/lib/elements/custom-style";
 import {FitElement} from "fit-html";
 import {State} from "../provider";
+import decorateInput from "../util/form-inputs";
 
 export interface EventNewProps {
 }
@@ -131,9 +132,7 @@ connect<State, EventNewProps, {}>(
 
     <paper-card id="eventDetails" class$="${props.form.valid ? 'valid' : 'invalid'}" elevation="2">
       <div class="card-heading">
-        <paper-input name="name" no-label-float label="Event Title" value="${props.form.fields.name.inputValue}"
-            on-change="${e => props.form.handle(e, e.target.value)}">
-        </paper-input>
+        ${decorateInput(html`<paper-input no-label-float label="Event Title"></paper-input>`, 'name', props)}
       </div>
       <div class="card-content">
         <div role="listbox">
