@@ -17,14 +17,14 @@ import {State} from "../provider";
 export interface EventNewProps {
 }
 
+const v = validator => value => ({
+    valid: validator(value)
+});
+
 const EventNew = withForm(
     "event-new",
     {
-        name: value => ({
-            inputValue: value,
-            storedValue: value,
-            valid: value !== ""
-        })
+        name: v(value => value !== "")
     },
 connect<State, EventNewProps, {}>(
     (state: State, ownProps: {}, hostElement: FitElement<State, EventNewProps, {}>): EventNewProps => ({}),

@@ -17,13 +17,18 @@ export type FormActions =
 
 export type InputValue = string | boolean | number;
 export interface FormTransformResult {
+    inputValue?: InputValue,
+    storedValue?: any,
+    valid: boolean
+}
+export interface FormField {
     inputValue: InputValue,
     storedValue: any,
     valid: boolean
 }
 export interface FitForm {
     fields: {
-        [k: string]: FormTransformResult
+        [k: string]: FormField
     },
     valid: boolean,
 }
@@ -191,6 +196,16 @@ function allValid(fields: { [k: string]: FormTransformResult }) {
     return Object.keys(fields).every(key => fields[key].valid);
 }
 
+function augmentTransformResult(transform: (value: InputValue) => FormTransformResult, value: InputValue): FormField {
+    const input = transform(value);
+    const inputValue = input.inputValue || value;
+    return {
+        inputValue,
+        storedValue: input.valid ? inputValue : "",
+        ...input
+    };
+}
+
 export function formReducer(state: FitFormState = {}, action: FormActions): FitFormState {
     if(action.type === FormActionTypes.FORM_INIT) {
         const formId = action.payload;
@@ -223,7 +238,7 @@ export function formReducer(state: FitFormState = {}, action: FormActions): FitF
         if(!(fieldName in form)) {
             console.warn("Change on form missing field transformer");
         }
-        const output: FormTransformResult = form[fieldName](value);
+        const output = augmentTransformResult(form[fieldName], value);
 
         // dirty checking
         if(state[formId].fields[fieldName].inputValue === output.inputValue) {
@@ -232,9 +247,7 @@ export function formReducer(state: FitFormState = {}, action: FormActions): FitF
 
         const fields = {
             ...state[formId].fields,
-            [fieldName]: {
-                ...output
-            }
+            [fieldName]: output
         };
         return {
             ...state,
@@ -254,7 +267,7 @@ export function formReducer(state: FitFormState = {}, action: FormActions): FitF
         }
         const form = forms[formId];
         const fields = Object.keys(values).reduce((acc, key) => {
-            acc[key] = form[key](values[key]);
+            acc[key] = augmentTransformResult(form[key], values[key]);
             return acc;
         }, {});
         return {
