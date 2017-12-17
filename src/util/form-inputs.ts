@@ -1,6 +1,6 @@
 import {directive, DirectiveFn, NodePart, Part, TemplateInstance, TemplateResult} from "lit-html";
 import {FitFormElementProps, FitForm, FitFormDispatchers} from "./forms";
-import {PaperInputBehaviorImpl} from "@polymer/paper-input/paper-input-behavior";
+import {PaperInputBehaviorImpl} from "@polymer/paper-input/paper-input-behavior.js";
 
 export interface StateKeepingPart extends Part {
     previousValue: any;
