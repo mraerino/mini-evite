@@ -11,22 +11,22 @@ export type EventDataActions =
 
 let dataUnsubscribe: (() => void) | null = null;
 export function fetchEvent(): ThunkAction<void, State, void> {
-    return (dispatch, getState) => {
-        requireAuth().then(() => {
-            // unregister former listener
-            if(dataUnsubscribe) {
-                dataUnsubscribe();
-                dataUnsubscribe = null;
-            }
+    return async (dispatch, getState) => {
+        await requireAuth();
 
-            const eventId = paramSelector(getState(), 'slug');
-            if(eventId === "") {
-                return;
-            }
+        // unregister former listener
+        if(dataUnsubscribe) {
+            dataUnsubscribe();
+            dataUnsubscribe = null;
+        }
 
-            dataUnsubscribe = firebase.firestore().collection("events").doc(eventId)
-                .onSnapshot(snap => dispatch(fetchEventResult(snap.exists ? snap.data() : {})));
-        });
+        const eventId = paramSelector(getState(), 'slug');
+        if(eventId === "") {
+            return;
+        }
+
+        dataUnsubscribe = firebase.firestore().collection("events").doc(eventId)
+            .onSnapshot(snap => dispatch(fetchEventResult(snap.exists ? snap.data() : {})));
     }
 }
 
