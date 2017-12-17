@@ -2,7 +2,7 @@ import {directive, DirectiveFn, NodePart, Part, TemplateInstance, TemplateResult
 import {FitFormElementProps, FitForm, FitFormDispatchers} from "./forms";
 import {PaperInputBehaviorImpl} from "@polymer/paper-input/paper-input-behavior.js";
 
-export interface StateKeepingPart extends Part {
+export interface StateKeepingPart extends NodePart {
     previousValue: any;
 }
 
@@ -16,7 +16,7 @@ export const decorateInput = (
     literal: TemplateResult,
     name: string,
     props: FitFormElementProps<{}>
-): DirectiveFn => directive((part: NodePart & StateKeepingPart) => {
+): DirectiveFn => directive((part: StateKeepingPart) => {
     const previous = part.previousValue || {};
 
     const instance: TemplateInstance = previous.template !== literal.template
