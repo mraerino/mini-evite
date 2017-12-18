@@ -2,6 +2,7 @@ import {FitElement} from "fit-html";
 import {Action, Dispatch} from "redux";
 import {TemplateResult} from "lit-html";
 import {ThunkAction} from "redux-thunk";
+import {ThunkDispatch} from "../actions/types";
 
 export const enum FormActionTypes {
     FORM_INPUT_CHANGED = 'FORM_INPUT_CHANGED',
@@ -100,8 +101,8 @@ export function resetForm(id: string): FormResetAction {
     }
 }
 
-export function submitForm<S>(id: string, values: SerializedValues, action: Action): ThunkAction<void, S, void> {
-    return (dispatch: Dispatch<S>) => {
+export function submitForm<S>(id: string, values: SerializedValues, action: Action | ThunkAction<void, S, void>): ThunkAction<void, S, void> {
+    return (dispatch: ThunkDispatch<void, S, void>) => {
         dispatch(validateAll(id, values));
         dispatch(action);
     }
@@ -122,11 +123,11 @@ export function formSelector(id: string) {
     }
 }
 
-export interface FitFormDispatchers {
+export interface FitFormDispatchers<S> {
     handle(e: Event, value: InputValue, name?: string): void
-    submit(action: Action): void
+    submit(action: Action | ThunkAction<void, S, void>): void
 }
-export function formActionSelector<S, P, OP>(id: string, dispatch: Dispatch<S>, hostElement: FitFormElement<S, P, OP>): FitFormDispatchers {
+export function formActionSelector<S, P, OP>(id: string, dispatch: Dispatch<S>, hostElement: FitFormElement<S, P, OP>): FitFormDispatchers<S> {
     return {
         handle(e: Event, value: InputValue, name: string = "") {
             const fieldName = name || (e.currentTarget as HTMLInputElement).name || "";
@@ -135,7 +136,7 @@ export function formActionSelector<S, P, OP>(id: string, dispatch: Dispatch<S>, 
             }
             dispatch(handleEvent(value, id, fieldName));
         },
-        submit(action: Action): void {
+        submit(action) {
             const elem = hostElement.shadowRoot || hostElement;
             const values = Object.keys(forms[id]).reduce((acc, key): SerializedValues => {
                 acc[key] = (
@@ -157,11 +158,11 @@ function registerForm<S>(id: string, transformer: FormTransformer, dispatch: Dis
     dispatch(initForm(id));
 }
 
-export type FitFormElementProps<P> = P & { form: FitForm & FitFormDispatchers };
+export type FitFormElementProps<P, S> = P & { form: FitForm & FitFormDispatchers<S> };
 export interface FitFormElement<S, P, OP> extends FitElement<S, P, OP> {
-    templateFunction: (props: FitFormElementProps<P>) => TemplateResult;
+    templateFunction: (props: FitFormElementProps<P, S>) => TemplateResult;
 
-    getProps(ownProps: OP): FitFormElementProps<P>;
+    getProps(ownProps: OP): FitFormElementProps<P, S>;
 }
 export function withForm<S, P, OP>(id: string, transformer: FormTransformer, base: FitElement<S, P, OP>): FitFormElement<S, P, OP> {
     return class extends base {
@@ -170,7 +171,7 @@ export function withForm<S, P, OP>(id: string, transformer: FormTransformer, bas
             registerForm<S>(id, transformer, this.getStore().dispatch);
         }
 
-        getProps(ownProps = {} as OP): FitFormElementProps<P> {
+        getProps(ownProps = {} as OP): FitFormElementProps<P, S> {
             const props = super.getProps(ownProps);
             const state = this.getStore().getState();
             return Object.assign({},

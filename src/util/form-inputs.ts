@@ -39,7 +39,7 @@ export const isPaperInput = elem => elem.behaviors && elem.behaviors.indexOf(Pap
 export const decorateInput = (
     literal: TemplateResult,
     name: string,
-    props: FitFormElementProps<{}>
+    props: FitFormElementProps<any, any>
 ): DirectiveFn => directive((part: StateKeepingPart) => {
     const previous = part.previousValue || {};
 

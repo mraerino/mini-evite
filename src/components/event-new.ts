@@ -44,7 +44,7 @@ const EventNew = withForm(
 connect<State, EventNewProps, {}>(
     (state: State, ownProps: {}, hostElement: FitElement<State, EventNewProps, {}>): EventNewProps => ({}),
     {},
-    (props: FitFormElementProps<EventNewProps>) => html`
+    (props: FitFormElementProps<EventNewProps, State>) => html`
     <style>
       :host {
         display: block;
@@ -191,5 +191,5 @@ connect<State, EventNewProps, {}>(
       </div>
     </paper-card>
     `
-) as FitElement<State, FitFormElementProps<EventNewProps>, {}>);
+) as FitElement<State, FitFormElementProps<EventNewProps, State>, {}>);
 customElements.define('event-new', EventNew);
