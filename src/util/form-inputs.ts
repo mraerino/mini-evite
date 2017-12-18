@@ -75,7 +75,9 @@ export const decorateInput = (
         );
     }
 
-    const value = props.form.fields[name].inputValue;
+    const value = name in props.form.fields
+        ? props.form.fields[name].inputValue
+        : previous.value;
     if(previous.value !== value) {
         element.value = String(value);
         element.invalid = !props.form.fields[name].valid;

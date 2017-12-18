@@ -198,7 +198,9 @@ function allValid(fields: { [k: string]: FormTransformResult }) {
 }
 
 function augmentTransformResult(transform: (value: InputValue) => FormTransformResult, value: InputValue): FormField {
-    const input = transform(value);
+    const input = transform !== undefined
+        ? transform(value)
+        : { valid: true } as FormTransformResult;
     const inputValue = input.inputValue || value;
     return {
         inputValue,
@@ -242,7 +244,10 @@ export function formReducer(state: FitFormState = {}, action: FormActions): FitF
         const output = augmentTransformResult(form[fieldName], value);
 
         // dirty checking
-        if(state[formId].fields[fieldName].inputValue === output.inputValue) {
+        const formerValue = fieldName in state[formId].fields
+            ? state[formId].fields[fieldName].inputValue
+            : null;
+        if(formerValue === output.inputValue) {
             return state;
         }
 
