@@ -156,21 +156,30 @@ connect<State, EventNewProps, {}>(
             <iron-icon icon="schedule" slot="item-icon"></iron-icon>
             <paper-item-body>
                 <label for="toggle-fullday">Ganztägig</label>
-                <paper-toggle-button id="toggle-fullday"></paper-toggle-button>              
+                <paper-toggle-button id="toggle-fullday" name="fullDay"
+                    checked="${Boolean(props.form.fields['fullDay'].inputValue)}"
+                    on-change="${e => props.form.handle(e, (e.target as HTMLInputElement).checked)}">
+                </paper-toggle-button>
             </paper-item-body>
           </paper-icon-item>
           <paper-icon-item class="datetime range">
             <paper-item-body>
                 <label>Von</label>
                 ${decorateInput(html`<paper-input label="DD.MM.YYYY" no-label-float></paper-input>`, 'startDate', props)}
-                ${decorateInput(html`<paper-input label="HH:MM" no-label-float></paper-input>`, 'startTime', props)}
+                ${decorateInput(html`
+                    <paper-input label="HH:MM" no-label-float
+                        hidden=${Boolean(props.form.fields['fullDay'].inputValue)}></paper-input>
+                 `, 'startTime', props)}
             </paper-item-body>
           </paper-icon-item>
           <paper-icon-item class="datetime range">
             <paper-item-body>
                 <label>Bis</label>
                 ${decorateInput(html`<paper-input label="DD.MM.YYYY" no-label-float></paper-input>`, 'endDate', props)}
-                ${decorateInput(html`<paper-input label="HH:MM" no-label-float></paper-input>`, 'endTime', props)}
+                ${decorateInput(html`
+                    <paper-input label="HH:MM" no-label-float
+                        hidden=${Boolean(props.form.fields['fullDay'].inputValue)}></paper-input>
+                 `, 'endTime', props)}
             </paper-item-body>
           </paper-icon-item>
           <paper-icon-item>

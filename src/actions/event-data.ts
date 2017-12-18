@@ -49,8 +49,12 @@ export function fetchEventResult(data: EventData): FetchEventResultAction {
     }
 }
 
-function parseDateTime(date: string, time: string) {
+function parseDateTime(date: string, time: string, fullDay: boolean = false) {
     const datetime = Luxon.fromString(date, "dd.MM.yyyy");
+    if(fullDay) {
+        return datetime;
+    }
+
     const timeMatches = time.match(/^([0-2]?\d):([0-5]\d)$/);
 
     if(timeMatches === null || timeMatches.length < 3 || !datetime.isValid) {
@@ -70,7 +74,16 @@ export function createEvent(): ThunkAction<Promise<void>, State, void> {
         }
 
         const {fields} = form;
-        const startDate = parseDateTime(fields.startDate.storedValue, fields.startTime.storedValue);
+        const startDate = parseDateTime(
+            fields.startDate.storedValue,
+            fields.startTime.storedValue,
+            fields.fullDay.storedValue
+        );
+        const endDate = parseDateTime(
+            fields.endDate.storedValue,
+            fields.endTime.storedValue,
+            fields.fullDay.storedValue
+        );
         const event: EventData = {
             name: fields.name.storedValue as string,
             location: {
@@ -79,7 +92,7 @@ export function createEvent(): ThunkAction<Promise<void>, State, void> {
             description: fields.description.storedValue as string,
             times: {
                 starts_at: startDate.toJSDate(),
-                ends_at: parseDateTime(fields.endDate.storedValue, fields.endTime.storedValue).toJSDate(),
+                ends_at: endDate.toJSDate(),
                 full_day: fields.fullDay.storedValue as boolean
             }
         };
