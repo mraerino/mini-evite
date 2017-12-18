@@ -1,16 +1,16 @@
 import {Action, ActionTypes} from "../actions/types";
 
 export interface EventDataInterface {
-    name: String,
+    name: string,
     times: {
         starts_at: Date,
         ends_at: Date,
         full_day: boolean
     },
     location: {
-        address?: String,
-        gmaps_url?: String,
-        name: String
+        address?: string,
+        gmaps_url?: string,
+        name: string
     }
 }
 export type EventData = EventDataInterface | null;
