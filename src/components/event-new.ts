@@ -14,6 +14,7 @@ import "@polymer/polymer/lib/elements/custom-style";
 import {FitElement} from "fit-html";
 import {State} from "../provider";
 import decorateInput from "../util/form-inputs";
+import {createEvent} from "../actions/event-data";
 import { DateTime as Luxon } from 'luxon';
 
 export interface EventNewProps {
@@ -188,7 +189,7 @@ connect<State, EventNewProps, {}>(
         </div>
       </div>
       <div class="card-actions">
-        <paper-button on-click="${() => props.form.submit({ type: null })}">Erstellen</paper-button>
+        <paper-button on-click="${() => props.form.submit(createEvent())}">Erstellen</paper-button>
       </div>
     </paper-card>
     `
