@@ -39,7 +39,9 @@ const EventNew = withForm(
         startDate: v(validDate),
         startTime: v(validTime),
         endDate: v(validDate),
-        endTime: v(validTime)
+        endTime: v(validTime),
+        location: v(val => val !== ""),
+        description: v(() => true)
     },
 connect<State, EventNewProps, {}>(
     (state: State, ownProps: {}, hostElement: FitElement<State, EventNewProps, {}>): EventNewProps => ({}),
@@ -175,13 +177,13 @@ connect<State, EventNewProps, {}>(
             <iron-icon icon="room" slot="item-icon">
             </iron-icon>
             <paper-item-body>
-              <paper-input label="Location" no-label-float></paper-input>
+              ${decorateInput(html`<paper-input label="Location" no-label-float></paper-input>`, 'location', props)}
             </paper-item-body>
           </paper-icon-item>
           <paper-icon-item class="description">
             <iron-icon icon="subject" slot="item-icon"></iron-icon>
             <paper-item-body>
-              <paper-textarea label="Beschreibung" no-label-float></paper-textarea>
+              ${decorateInput(html`<paper-textarea label="Beschreibung" no-label-float></paper-textarea>`, 'description', props)}
             </paper-item-body>
           </paper-icon-item>
         </div>
