@@ -151,7 +151,7 @@ export function formActionSelector<S, P, OP>(id: string, dispatch: Dispatch<S>, 
 
 function registerForm<S>(id: string, transformer: FormTransformer, dispatch: Dispatch<S>): void {
     if(id in forms) {
-        throw new Error("Form with this id already exists.");
+        return;
     }
 
     forms[id] = transformer;
