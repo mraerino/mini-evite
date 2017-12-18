@@ -13,6 +13,7 @@ export const enum FormActionTypes {
 
 export type FormActions =
     | FormInitAction
+    | FormResetAction
     | FormInputChangedAction
     | FormValidateAllAction;
 
@@ -210,13 +211,13 @@ function augmentTransformResult(transform: (value: InputValue) => FormTransformR
 }
 
 export function formReducer(state: FitFormState = {}, action: FormActions): FitFormState {
-    if(action.type === FormActionTypes.FORM_INIT) {
+    if(action.type === FormActionTypes.FORM_INIT || action.type === FormActionTypes.FORM_RESET) {
         const formId = action.payload;
         if(!(formId in forms)) {
             console.warn("Tried to init form without transformer");
             return state;
         }
-        if(formId in state) {
+        if(formId in state && action.type === FormActionTypes.FORM_INIT) {
             return state; // not overwriting existing forms
         }
         return {

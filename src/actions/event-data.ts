@@ -9,6 +9,7 @@ import { DateTime as Luxon } from 'luxon';
 import slugify from 'slugify';
 import {push as navigateTo} from "@mraerino/redux-little-router-reactless/lib";
 import shortid from 'shortid';
+import {resetForm} from "../util/forms";
 
 export type EventDataActions =
     | FetchEventResultAction
@@ -88,5 +89,6 @@ export function createEvent(): ThunkAction<Promise<void>, State, void> {
         await getCollection().doc(slug).set(event);
 
         dispatch(navigateTo(`/${slug}`, {}));
+        dispatch(resetForm('event-new'));
     }
 }
