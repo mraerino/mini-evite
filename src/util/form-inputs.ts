@@ -11,6 +11,30 @@ export interface PaperInputElement extends HTMLInputElement {
     invalid: boolean
 }
 
+const InputFocusedMap = new WeakMap();
+const InputValueMap = new WeakMap();
+const getFixedHandler = (handler: (e: CustomEvent) => void) => {
+    return (e: CustomEvent): void => {
+        const former = InputFocusedMap.get(e.target) || false;
+        if(e.detail.value === former) {
+            return;
+        }
+        InputFocusedMap.set(e.target, e.detail.value);
+
+        if(e.detail.value === true) {
+            return;
+        }
+
+        const oldVal = InputValueMap.get(e.target) || "";
+        const {value} = e.target as HTMLInputElement;
+        if(value === oldVal) {
+            return;
+        }
+        InputValueMap.set(e.target, value);
+        handler(e);
+    }
+};
+
 export const isPaperInput = elem => elem.behaviors && elem.behaviors.indexOf(PaperInputBehaviorImpl) !== -1;
 export const decorateInput = (
     literal: TemplateResult,
@@ -41,13 +65,13 @@ export const decorateInput = (
         element.setAttribute('name', name);
         if(previous.name) {
             element.removeEventListener(
-                'change',
-                e => props.form.handle(e, (e.target as HTMLInputElement).value, previous.name)
+                'focused-changed',
+                getFixedHandler(e => props.form.handle(e, (e.target as HTMLInputElement).value, previous.name))
             );
         }
         element.addEventListener(
-            'change',
-            e => props.form.handle(e, (e.target as HTMLInputElement).value, name)
+            'focused-changed',
+            getFixedHandler(e => props.form.handle(e, (e.target as HTMLInputElement).value, name))
         );
     }
 
