@@ -8,7 +8,7 @@ export default store => next => action => {
         return next(action);
     }
 
-    const slug = paramSelector(store.getState(), 'slug');
+    const {slug} = action.payload.params;
     if(slug !== lastSlug) {
         lastSlug = slug;
         store.dispatch(fetchEvent());
