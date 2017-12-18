@@ -61,11 +61,12 @@ const EventDetail = connect(
     </style>
     <custom-style>
       <style>
-        paper-icon-item#guest_avatars {
+        #guest_avatars {
           --paper-item-icon: {
             align-self: flex-start;
             margin-top: 15px;
           };
+          padding-bottom: 16px;
         }
 
         #eventDetails {
@@ -106,6 +107,16 @@ const EventDetail = connect(
                 </div>
             </paper-item-body>
           </paper-icon-item>
+          ${props.data.description
+            ? html`
+                <paper-icon-item>
+                  <iron-icon icon="subject" slot="item-icon">
+                  </iron-icon>
+                  <paper-item-body>
+                      <p>${props.data.description}</p>
+                  </paper-item-body>
+                </paper-icon-item>`
+            : null}
         </div>
       </div>
       <div class="card-actions">
