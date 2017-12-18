@@ -13,6 +13,8 @@ import shortid from 'shortid';
 export type EventDataActions =
     | FetchEventResultAction
 
+const getCollection = () => firebase.firestore().collection("events");
+
 let dataUnsubscribe: (() => void) | null = null;
 export function fetchEvent(): ThunkAction<void, State, void> {
     return async (dispatch, getState) => {
@@ -29,7 +31,7 @@ export function fetchEvent(): ThunkAction<void, State, void> {
             return;
         }
 
-        dataUnsubscribe = firebase.firestore().collection("events").doc(eventId)
+        dataUnsubscribe = getCollection().doc(eventId)
             .onSnapshot(snap => dispatch(fetchEventResult(snap.exists ? snap.data() : {})));
     }
 }
@@ -83,7 +85,7 @@ export function createEvent(): ThunkAction<Promise<void>, State, void> {
 
         const slug = `${shortid()}-${startDate.toFormat("yyyy-MM-dd")}-${slugify(event.name)}`;
 
-        await firebase.firestore().collection("events").doc(slug).set(event);
+        await getCollection().doc(slug).set(event);
 
         dispatch(navigateTo(`/${slug}`, {}));
     }
