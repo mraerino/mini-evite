@@ -33,7 +33,8 @@ const EventNew = withForm(
     {
         name: v(value => value !== ""),
         fullDay: value => ({
-            inputValue: !!value,
+            inputValue: Boolean(value),
+            storedValue: Boolean(value),
             valid: true
         }),
         startDate: v(validDate),
