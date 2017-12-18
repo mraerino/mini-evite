@@ -14,6 +14,7 @@ import "@polymer/polymer/lib/elements/custom-style";
 import {FitElement} from "fit-html";
 import {State} from "../provider";
 import decorateInput from "../util/form-inputs";
+import { DateTime as Luxon } from 'luxon';
 
 export interface EventNewProps {
 }
@@ -21,11 +22,8 @@ export interface EventNewProps {
 const v = validator => value => ({
     valid: validator(value)
 });
-const dateMatcher = /^(\d{2}).(\d{2}).(\d{4})$/;
-const validDate = value =>
-    dateMatcher.test(value) && value
-        .match(dateMatcher).slice(1)
-        .every((val, i) => i == 0 ? parseInt(val) <= 31 : (i == 1 ? parseInt(val) <= 12 : true));
+const makeDate = value => Luxon.fromString(value, "dd.MM.yyyy");
+const validDate = value => makeDate(value).isValid;
 const validTime = value => /^[0-2]?\d:[0-5]\d$/.test(value);
 
 const EventNew = withForm(

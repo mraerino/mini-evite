@@ -2650,6 +2650,10 @@ ltgt@^2.1.2:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/ltgt/-/ltgt-2.2.0.tgz#b65ba5fcb349a29924c8e333f7c6a5562f2e4842"
 
+luxon@^0.2.9:
+  version "0.2.9"
+  resolved "https://registry.yarnpkg.com/luxon/-/luxon-0.2.9.tgz#cd8badb9528da07f25b53ca68ccb79d39f08685e"
+
 magic-string@^0.16.0:
   version "0.16.0"
   resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.16.0.tgz#970ebb0da7193301285fb1aa650f39bdd81eb45a"
