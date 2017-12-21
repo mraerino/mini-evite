@@ -12,7 +12,8 @@ export interface EventDataInterface {
         gmaps_url?: string,
         name: string
     },
-    description: string
+    description: string,
+    created_by: string,
 }
 export type EventData = EventDataInterface | null;
 
@@ -34,7 +35,8 @@ export const emptyEvent: EventDataInterface = {
         ends_at: new Date(0),
         full_day: false
     },
-    description: ""
+    description: "",
+    created_by: "",
 };
 
 export default function eventReducer(

@@ -65,7 +65,7 @@ function parseDateTime(date: string, time: string, fullDay: boolean = false) {
 }
 
 export function createEvent(): ThunkAction<Promise<void>, State, void> {
-    return async (dispatch, getState) => {
+    return async (dispatch, getState: () => State) => {
         await requireAuth();
 
         const form = getState().forms['event-new'];
@@ -94,7 +94,8 @@ export function createEvent(): ThunkAction<Promise<void>, State, void> {
                 starts_at: startDate.toJSDate(),
                 ends_at: endDate.toJSDate(),
                 full_day: fields.fullDay.storedValue as boolean
-            }
+            },
+            created_by: getState().user.fromFirebase.uid,
         };
 
         const slug = `${shortid()}-${startDate.toFormat("yyyy-MM-dd")}-${slugify(event.name)}`;
